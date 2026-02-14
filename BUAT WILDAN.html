@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>God Level Love for Muhammad Wildan 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #ffd6e0, #ff9a9e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow: hidden;
+      color: #333;
+    }
+
+    body.dark {
+      background: radial-gradient(circle at top, #0f1020, #000);
+      color: #eee;
+    }
+
+    .container {
+      background: rgba(255,255,255,0.94);
+      padding: 46px 34px;
+      border-radius: 32px;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+      max-width: 470px;
+      width: 92%;
+      position: relative;
+      animation: fadeIn 1s ease;
+    }
+
+    body.dark .container { background: rgba(25,25,45,0.96); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(35px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    h1 { color: #e63946; margin-bottom: 8px; }
+
+    .heart { font-size: 52px; animation: pulse 1.3s infinite; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.32); }
+      100% { transform: scale(1); }
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff6b81, #e63946);
+      border: none;
+      color: white;
+      padding: 15px 28px;
+      border-radius: 999px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: 0.25s;
+      box-shadow: 0 12px 28px rgba(230,57,70,0.45);
+    }
+
+    button:hover { transform: scale(1.12); }
+
+    .chat {
+      text-align: left;
+      background: #e5ddd5;
+      padding: 15px;
+      border-radius: 15px;
+      margin-top: 10px;
+      max-height: 200px;
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    .msg { background: white; padding: 8px 12px; border-radius: 12px; margin: 6px 0; width: fit-content; }
+
+    .falling-heart {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fall { to { transform: translateY(110vh); opacity: 0; } }
+
+    .dark-toggle {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 12px;
+      background: #333;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .game-heart {
+      position: absolute;
+      font-size: 28px;
+      cursor: pointer;
+      animation: float 4s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-120vh); }
+    }
+
+    .tiny { font-size: 13px; opacity: 0.7; margin-top: 10px; }
+
+    input {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+      width: 80%;
+      text-align: center;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="app">
+    <div class="dark-toggle" onclick="toggleDark()">🌙</div>
+    <div class="heart">💖</div>
+    <h1>Hi Muhammad Wildan</h1>
+    <p>Enter our secret date first… 🔐</p>
+    <input type="password" id="code" placeholder="DDMMYY" />
+    <br>
+    <button onclick="checkCode()">Unlock 💌</button>
+  </div>
+
+  <audio id="bgm" src="song.mp3"></audio>
+
+  <script>
+    let step = 0;
+
+    const screens = [
+      `
+        <div class='heart'>💘</div>
+        <h1>Happy Valentine</h1>
+        <p>You are my today and all of my tomorrows.</p>
+        <button onclick='nextStep()'>Next ➜</button>
+      `,
+      `
+        <h1>Our Little Chat 💬</h1>
+        <div class='chat'>
+          <div class='msg'>Hi, I miss you…</div>
+          <div class='msg'>I miss you more 🥺</div>
+          <div class='msg'>Wait for me, okay?</div>
+          <div class='msg'>Always. 💖</div>
+        </div>
+        <button onclick='nextStep()'>Next ➜</button>
+      `,
+      `
+        <h1>Mini Game 🎮</h1>
+        <p>Catch 5 hearts to unlock my secret message!</p>
+        <button onclick='startGame()'>Start Game 💘</button>
+      `
+    ];
+
+    function checkCode(){
+      const value = document.getElementById('code').value;
+      if(value === "240325"){
+        nextStep();
+        document.getElementById('bgm').play().catch(()=>{});
+      } else {
+        alert("Wrong date 🥺 try again");
+      }
+    }
+
+    function nextStep() {
+      document.getElementById('app').innerHTML = screens[step];
+      step++;
+    }
+
+    function startGame(){
+      document.getElementById('app').innerHTML = `<h1>Catch the Hearts 💖</h1><p id='score'>0 / 5</p>`;
+      let score = 0;
+
+      const interval = setInterval(()=>{
+        const h = document.createElement('div');
+        h.className='game-heart';
+        h.innerHTML='💖';
+        h.style.left=Math.random()*90+'vw';
+        h.style.top='90vh';
+
+        h.onclick=()=>{
+          score++;
+          document.getElementById('score').innerText = score + ' / 5';
+          h.remove();
+          spawnHearts();
+
+          if(score>=5){
+            clearInterval(interval);
+            finalScene();
+          }
+        };
+
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),4000);
+      },700);
+    }
+
+    function finalScene(){
+      document.getElementById('app').innerHTML = `
+        <div class='heart'>💖</div>
+        <h1>I Love You Forever</h1>
+        <p>No distance, no time, nothing can change this.</p>
+        <button onclick='spawnHearts()'>Tap for endless love 💘</button>
+        <div class='tiny'>
+         To my loml,
+
+Every little thing you do, from the way you smile to the way you talk, just makes my heart so full. I love how we can laugh about the smallest things and how even in the quiet moments, there's a kind of magic between us. You make me feel like I'm exactly where I'm supposed to be, and I can't imagine my life without you in it.
+
+I love how you support me, even when I doubt myself, and how you always find a way to make me see the brighter side. You make me want to be better, for you and for us. You're my calm in the storm, my partner in all the craziness of life, and I can't wait for all the memories we'll create together.
+
+I love you more than words can express, and I can't wait to spend forever with you. <br>
+          You are my calm, my happiness, and my forever. <br>
+          I love you more than words can ever explain. 💖
+        </div>
+      `;
+      spawnHearts();
+    }
+
+    function spawnHearts(){
+      for(let i=0;i<35;i++){
+        const h=document.createElement('div');
+        h.className='falling-heart';
+        h.innerHTML=['💖','💘','💕','💞'][Math.floor(Math.random()*4)];
+        h.style.left=Math.random()*100+'vw';
+        h.style.animationDuration=(2+Math.random()*3)+'s';
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),5000);
+      }
+    }
+
+    function toggleDark(){ document.body.classList.toggle('dark'); }
+  </script>
+
+</body>
+</html>
